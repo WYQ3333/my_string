@@ -47,7 +47,7 @@ private:
 	char *my_str;
 };
 
-int main()
+void test()
 {
 	my_string d1;
 	my_string d2("hello world");
@@ -55,6 +55,10 @@ int main()
 	my_string d4(d2);
 	my_string d5;
 	d5 = d2;
+}
+int main()
+{
+	test();
 	system("pause");
 	return 0;
 }
