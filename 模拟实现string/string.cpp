@@ -2,7 +2,7 @@
 #include<iostream>
 #include<assert.h>
 using namespace std;
-
+#if 0
 class my_string
 {
 public:
@@ -56,6 +56,64 @@ void test()
 	my_string d5;
 	d5 = d2;
 }
+int main()
+{
+	test();
+	system("pause");
+	return 0;
+}
+#endif
+class my_string
+{
+public:
+	//构造函数
+	my_string(const char *str = "")
+	{
+		if (str == nullptr)
+		{
+			assert(str);
+			return;
+		}
+		my_str = new char[strlen(str) + 1];
+		strcpy(my_str, str);
+	}
+	//拷贝构造函数
+	my_string(const my_string& s)
+		:my_str(nullptr)
+	{
+		//建立新的临时对象，完成交换，拷贝构造函数结束时tempstr空间释放
+		my_string tempstr(s.my_str);
+		swap(my_str, tempstr.my_str);
+	}
+	//赋值运算符重载
+	my_string& operator=(my_string s)
+	{
+		swap(my_str, s.my_str);
+		return *this;
+	}
+	//析构函数
+	~my_string()
+	{
+		if (my_str != nullptr)
+		{
+			delete[] my_str;
+			my_str = nullptr;
+		}
+	}
+private:
+	char *my_str;
+};
+
+void test()
+{
+	my_string d1;
+	my_string d2("hello world");
+	my_string d3 = d2;
+	my_string d4(d2);
+	my_string d5;
+	d5 = d4;
+}
+
 int main()
 {
 	test();
