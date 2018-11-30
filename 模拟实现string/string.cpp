@@ -17,7 +17,7 @@ public:
 		my_str = new char[strlen(str)+1];
 		strcpy(my_str, str);
 	}
-	//拷贝构造函数
+	//传统写法拷贝构造函数
 	my_string(const my_string& s)
 		:my_str(new char[strlen(s.my_str) + 1])
 	{
@@ -33,6 +33,10 @@ public:
 			my_str = pstr;
 		}
 		return *this;
+	}
+	void display()
+	{
+		cout << my_str << endl;
 	}
 	//析构函数
 	~my_string()
@@ -50,11 +54,21 @@ private:
 void test()
 {
 	my_string d1;
+	cout << "d1中存放空串";
+	d1.display();
 	my_string d2("hello world");
+	cout << "d2:";
+	d2.display();
 	my_string d3 = d2;
+	cout << "d3:";
+	d3.display();
 	my_string d4(d2);
+	cout << "d4:";
+	d4.display();
 	my_string d5;
-	d5 = d2;
+	d5 = d4;
+	cout << "d5:";
+	d5.display();
 }
 int main()
 {
@@ -63,6 +77,7 @@ int main()
 	return 0;
 }
 #endif
+#if 1
 class my_string
 {
 public:
@@ -77,7 +92,7 @@ public:
 		my_str = new char[strlen(str) + 1];
 		strcpy(my_str, str);
 	}
-	//拷贝构造函数
+	//现代写法拷贝构造函数
 	my_string(const my_string& s)
 		:my_str(nullptr)
 	{
@@ -90,6 +105,10 @@ public:
 	{
 		swap(my_str, s.my_str);
 		return *this;
+	}
+	void display()
+	{
+		cout << my_str << endl;
 	}
 	//析构函数
 	~my_string()
@@ -107,11 +126,21 @@ private:
 void test()
 {
 	my_string d1;
-	my_string d2("hello world");
+	cout << "d1中存放空串";
+	d1.display();
+	my_string d2("I love you");
+	cout << "d2:";
+	d2.display();
 	my_string d3 = d2;
+	cout << "d3:";
+	d3.display();
 	my_string d4(d2);
+	cout << "d4:";
+	d4.display();
 	my_string d5;
 	d5 = d4;
+	cout << "d5:";
+	d5.display();
 }
 
 int main()
@@ -120,3 +149,4 @@ int main()
 	system("pause");
 	return 0;
 }
+#endif
